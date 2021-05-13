@@ -92,6 +92,10 @@ async def handle_command(slack_message, slack_user=None):
     response = None
 
     default_response_text = "I didn't understand the command. Please use `help` for more details."
+    
+    _command = slack_message.split(' ')[0]
+    slack_message = _command + ' ' +slack_message.replace('<', '').replace('>', '').split('|')[1]
+    logging.debug("\n\n\nSLACK MESSAGE \n\n\n " + slack_message)
 
     # strip any mention "strings" from beginning of message
     matches = re.search(mention_regex, slack_message)
